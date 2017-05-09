@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	    <title>Products</title>
+	    <title>Customers</title>
 
 	    <!-- Bootstrap -->
 	    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 		$(document).ready(function(){
 			$.ajax(
 			{
-				url: "/index.php/home/showproduct",
+				url: "/index.php/home/showcustomer",
 			       type: "POST",
 			       data: {},
 			       dataType: "json",
@@ -30,11 +30,9 @@
 				        $("tbody").children("tr").remove();
 				       	for (var i = 0; i < data.length; i++)
 				       	{
-				       	var laman = "<tr id=" + data[i]['ProdID'] +"> <td>"+data[i]['ProdName']+"</td> <td>&#8369; "+parseFloat(data[i]['Price']).toFixed(2)+"</td> <td>"+data[i]['Stock']+"</td> <td><input type='button' data-id=" + data[i]['ProdID'] + " value='Edit' class='btnedit'> <input type='button' data-id=" + data[i]['ProdID'] +" value='Delete' class='btndelete'></td> </tr>";
+				       		console.log(data)
+				       	var laman = "<tr id=" + data[i]['UserID'] +"> <td>"+data[i]['Username']+"</td> <td>"+data[i]['Name']+"</td> <td>"+data[i]['Email']+"</td> <td>"+data[i]['ContactNumber']+"</td> <td>"+data[i]['Address']+"</td> <td><input type='button' data-id=" + data[i]['UserID'] + " value='Edit' class='btnedit'> <input type='button' data-id=" + data[i]['UserID'] +" value='Delete' class='btndelete'></td> </tr>";
 				       	$("#data").append(laman);
-				       	$('#price').change(function() {
-  							$('#price').val( $('#price').val().toFixed(2));
-						});
 			       	}
 			    }
 
@@ -53,7 +51,7 @@
 				  		
 					    $.ajax(
 						{
-							url: "/index.php/home/deleteproduct",
+							url: "/index.php/home/deletecustomer",
 						       	type: "POST",
 						       	data: { "id" : id},
 						       	dataType: "json",
@@ -77,19 +75,19 @@
 
 			$("#product-table").on("click", ".btnedit", function(){
 				var id = $(this).attr("data-id");
-				window.location.assign("http://digidirect.dev.ph/index.php/home/edit_product/"+id);
+				window.location.assign("http://digidirect.dev.ph/index.php/home/edit_customer/"+id);
 			});
 
 			$("#search").on("click", function(){
 				$("#data").html();
-				var txtSearch = $("#product").val();
+				var txtSearch = $("#customer").val();
 				console.log(txtSearch); 
 				$.ajax({
-				   url: "/index.php/home/showproductbykeyword",
+				   url: "/index.php/home/showcustomerbykeyword",
 			       type: "POST",
 			       data:
 			        {
-			       		"ProdName":txtSearch
+			       		"Name":txtSearch
 			       },
 			       dataType: "json",
 			       success: function(data)
@@ -98,11 +96,8 @@
 				        $("tbody").children("tr").remove();
 				       	for (var i = 0; i < data.length; i++)
 				       	{
-					       	var laman = "<tr id=" + data[i]['ProdID'] +"> <td>"+data[i]['ProdName']+"</td> <td>&#8369; "+parseFloat(data[i]['Price']).toFixed(2)+"</td> <td>"+data[i]['Stock']+"</td> <td><input type='button' data-id=" + data[i]['ProdID'] + " value='Edit' class='btnedit'> <input type='button' data-id=" + data[i]['ProdID'] +" value='Delete' class='btndelete'></td> </tr>";
-					       	$("#data").append(laman);
-					       	$('#price').change(function() {
-	  							$('#price').val( $('#price').val().toFixed(2));
-							});
+				       	var laman = "<tr id=" + data[i]['UserID'] +"> <td>"+data[i]['Username']+"</td> <td>"+data[i]['Name']+"</td> <td>"+data[i]['Email']+"</td> <td>"+data[i]['ContactNumber']+"</td> <td>"+data[i]['Address']+"</td> <td><input type='button' data-id=" + data[i]['UserID'] + " value='Edit' class='btnedit'> <input type='button' data-id=" + data[i]['UserID'] +" value='Delete' class='btndelete'></td> </tr>";
+				       	$("#data").append(laman);
 			       		}
 			    	}
 			    });
@@ -133,32 +128,34 @@
 		    		<a href="http://digidirect.dev.ph/index.php/home/index" class="menu">
 		    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
-		    		<p class="active">
+		    		<p class="menu">
+		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="menu"> 
 		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
 
 		    		<p class="menu">
 		    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
 		    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
-		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/customer" class="menu"> 
+		    		<p class="active">
 		    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 		    	</div>
 
 		    	<div class="col-md-10">
-		    		<h2 class="heading"> Products </h2>
-		    		<input class="form-control search" maxlength="30" placeholder="Product Name" id="product" name="txtProdName" type="text" autocomplete="off" autofocus>
-                    <input type="button" value="Search" id="search" class="btnadd">
-                    <button onclick="window.location.href='http://digidirect.dev.ph/index.php/home/add_product'" type="button" class="addbutton"> Add New </button>
+		    		<h2 class="heading"> Customers </h2>
+		    		<input class="form-control search" maxlength="30" placeholder="Customer Name" id="customer" name="txtProdName" type="text" autocomplete="off" autofocus>
+                    <input type="button" value="Search" id="search" class="up btnadd">
+                    <button onclick="window.location.href='http://digidirect.dev.ph/index.php/home/add_customer'" type="button" class="addbutton"> Add New </button>
 		    	</div>
 
 		    	<div class="col-md-10">
 					<table id="product-table">
 						<thead>
 						<tr> 
-							<th> &nbsp;&nbsp;Product Name </th>
-							<th id="price"> Price </th>
-							<th> Stocks </th>
+							<th> &nbsp;&nbsp;Username </th>
+							<th id="price"> Customer Name </th>
+							<th> Email Address </th>
+							<th> Contact Number </th>
+							<th> Address </th>
 							<th> Action </th>
 						</tr>
 						</thead>

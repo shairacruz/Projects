@@ -44,48 +44,124 @@ class Home extends CI_Controller {
     	$this->load->view('customer');
     }
 
-    public function add(){
+    public function addproduct(){
 	 	$this->load->model('UserModel');
 	 	$list = array();
-	 	$list = $this->UserModel->insert($_POST);
+	 	$list = $this->UserModel->insertproduct($_POST);
 	 	echo json_encode($list);
 	 	exit;
  	}
 
- 	public function show(){
+ 	public function showproduct(){
  		$this->load->model('UserModel');
      	$list = array();
-     	$list = $this->UserModel->view();
+     	$list = $this->UserModel->viewproduct();
      	echo json_encode($list);
      	exit;
  	}
 
- 	public function delete(){
+ 	public function deleteproduct(){
  		$this->load->model('UserModel');
- 		$list = $this->UserModel->delete($_POST);
+ 		$list = $this->UserModel->deleteproduct($_POST);
  		echo json_encode($list);
      	exit;
  	}
 
- 	public function editproduct($args){
+ 	public function edit_product($args){
  		$data = array();
  		$data['product_id'] = $args;
  		$this->load->view('editproduct', $data);
  	}
 
- 	public function retrieve(){
+ 	public function retrieveproduct(){
  		$this->load->model('UserModel');
- 		$list = $this->UserModel->retrieve($_POST);
+ 		$list = $this->UserModel->retrieveproduct($_POST);
  		echo json_encode($list);
      	exit;
  	}
 
- 	public function update(){
+ 	public function updateproduct(){
  		$this->load->model('UserModel');
- 		$list = $this->UserModel->update($_POST);
+ 		$list = $this->UserModel->updateproduct($_POST);
  		echo json_encode($list);
      	exit;
  	}
+
+ 	public function showproductbykeyword(){
+ 		$this->load->model('UserModel');
+     	$list = array();
+     	$list = $this->UserModel->filterproduct($_POST);
+     	echo json_encode($list);
+     	exit;
+ 	}
+
+	public function add_customer(){
+     	$this->load->view('addcustomer');
+    }
+
+    public function addcustomer(){
+	 	$this->load->model('UserModel');
+	 	$list = array();
+	 	$list = $this->UserModel->insertcustomer($_POST);
+	 	echo json_encode($list);
+	 	exit;
+ 	}
+
+ 	public function showcustomer(){
+ 		$this->load->model('UserModel');
+     	$list = array();
+     	$list = $this->UserModel->viewcustomer();
+     	echo json_encode($list);
+     	exit;
+ 	}
+
+ 	public function edit_customer($args){
+ 		$data = array();
+ 		$data['customer_id'] = $args;
+ 		$this->load->view('editcustomer', $data);
+ 	}
+
+ 	public function retrievecustomer(){
+ 		$this->load->model('UserModel');
+ 		$list = $this->UserModel->retrievecustomer($_POST);
+ 		echo json_encode($list);
+     	exit;
+ 	}
+
+ 	public function updatecustomer()
+ 	{
+ 		$this->load->model('UserModel');
+ 		$list = $this->UserModel->updatecustomer($_POST);
+ 		echo json_encode($list);
+     	exit;
+ 	}
+
+ 	public function deletecustomer(){
+ 		$this->load->model('UserModel');
+ 		$list = $this->UserModel->deletecustomer($_POST);
+ 		echo json_encode($list);
+     	exit;
+ 	}
+
+ 	public function showcustomerbykeyword(){
+ 		$this->load->model('UserModel');
+     	$list = array();
+     	$list = $this->UserModel->filtercustomer($_POST);
+     	echo json_encode($list);
+     	exit;
+ 	}
+
+    public function add_order(){
+        $this->load->view('addorder');
+    }
+
+    public function loadusername(){
+        $this->load->model('UserModel');
+        $list = array();
+        $list = $this->UserModel->loadusername();
+        echo json_encode($list);
+        exit;
+    }
 
 }
 

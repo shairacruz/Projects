@@ -21,7 +21,7 @@
 		$(document).ready(function(){
 			$.ajax(
 			{
-				url: "/index.php/home/showproduct",
+				url: "/index.php/home/showorder",
 			       type: "POST",
 			       data: {},
 			       dataType: "json",
@@ -134,10 +134,10 @@
 		    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
 		    		<p class="active">
+		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="menu"> 
 		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
 
-		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
+		    		<p class="active">
 		    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
 		    		<p class="menu">
@@ -146,20 +146,21 @@
 		    	</div>
 
 		    	<div class="col-md-10">
-		    		<h2 class="heading"> Products </h2>
+		    		<h2 class="heading"> Orders </h2>
 		    		<input class="form-control search" maxlength="30" placeholder="Product Name" id="product" name="txtProdName" type="text" autocomplete="off" autofocus>
                     <input type="button" value="Search" id="search" class="btnadd">
-                    <button onclick="window.location.href='http://digidirect.dev.ph/index.php/home/add_product'" type="button" class="addbutton"> Add New </button>
+                    <button onclick="window.location.href='http://digidirect.dev.ph/index.php/home/add_order'" type="button" class="addbutton"> Add New </button>
 		    	</div>
 
 		    	<div class="col-md-10">
 					<table id="product-table">
 						<thead>
 						<tr> 
-							<th> &nbsp;&nbsp;Product Name </th>
-							<th id="price"> Price </th>
-							<th> Stocks </th>
-							<th> Action </th>
+							<th> &nbsp;&nbsp;OrderID </th>
+							<th> Customer Name </th>
+							<th> Order Status </th>
+							<th id="price"> Total Price </th>
+							<th> Date </th>
 						</tr>
 						</thead>
 						<tbody id="data"></tbody>

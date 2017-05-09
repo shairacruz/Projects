@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	    <title>Add Product</title>
+	    <title>Edit Customer</title>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <!-- Bootstrap -->
 	    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
@@ -20,60 +20,80 @@
 	    <![endif]-->
 	    <script type="text/javascript">
 	    	$(document).ready(function(){
-	    		var ProdID = $("#ProdID").val();
+	    		var UserID = <?php echo $customer_id; ?>;
 	    		$.ajax({
-				url: "/index.php/home/retrieveproduct",
+				url: "/index.php/home/retrievecustomer",
 				       	type: "POST",
 				       	data: {
-				       		ProdID:ProdID
+				       		UserID:UserID
 				       	},
 				       	dataType: "json",
 				       	success: function(data)
 				       	{
-				       	$("#ProdID").val(data[0]["ProdID"])
-				       	$("#ProdName").val(data[0]["ProdName"]);
-				       	$("#Price").val(data[0]["Price"]);
-				       	$("#Stock").val(data[0]["Stock"]);
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          alert("Error Occured!");
-				          }
-				  
-				});
+				       		$("#Username").val(data[0]["Username"]);
+							$("#Password").val(data[0]["Password"]);
+							$("#FName").val(data[0]["FName"]);
+							$("#MName").val(data[0]["MName"]);
+							$("#LName").val(data[0]["LName"]);
+							$("#Email").val(data[0]["Email"]);
+							$("#ContactNumber").val(data[0]["ContactNumber"]);
+							$("#Address").val(data[0]["Address"]);
+						},
+						error: function (XMLHttpRequest, textStatus, errorThrown)
+			          	{ 
+			          	alert(XMLHttpRequest+ textStatus+ errorThrown);
+			          	}
+					  
+					});
 
-	    		$("#Update").click(function(){
-				var ProdName = $("#ProdName").val();
-				var Stock = $("#Stock").val();
-				var Price = $("#Price").val();
-				$.ajax({
-				url: "/index.php/home/updateproduct",
+				$("#Update").on("click", function(){
+					var UserID = <?php echo $customer_id; ?>;
+					var Username = $("#Username").val();
+					var Password = $("#Password").val();
+					var FName = $("#FName").val();
+					var MName = $("#MName").val();
+					var LName = $("#LName").val();
+					var Email = $("#Email").val();
+					var ContactNumber = $("#ContactNumber").val();
+					var Address = $("#Address").val();
+					$.ajax(
+					{
+						url: "/index.php/home/updatecustomer",
 				       	type: "POST",
-				       	data: {
-				       	ProdID:ProdID, ProdName:ProdName, Stock:Stock, Price:Price
+				       	data:
+				       	{ 
+				       		"UserID":UserID,
+				       		"Username":Username,
+					       	"Password": Password,
+					       	"FName": FName, 
+					       	"MName": MName, 
+					       	"LName": LName, 
+					       	"Email": Email, 
+					       	"ContactNumber": ContactNumber, 
+					       	"Address": Address
 				       	},
 				       	dataType: "json",
 				       	success: function(data)
 				       	{
-				       	alert("Item Successfully Updated!");
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/product");
+					       	alert("Item Successfully Updated!");
+					        window.location.assign("http://digidirect.dev.ph/index.php/home/customer");
 				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          alert("Error Occured!");
-				          }
-				  });
+						error: function (XMLHttpRequest, textStatus, errorThrown)
+				        { 
+				        	alert(XMLHttpRequest + ", " + textStatus + ", " +  errorThrown);
+				        }
+					});
 				});
 
-				$("#Cancel").click(function(){
+				$("#Cancel").on("click", function(){
 				$.ajax({
-				url: "/index.php/home/product",
+				url: "/index.php/home/customer",
 				       	type: "POST",
 				       	data: {},
 				       	dataType: "json",
 				       	success: function(data)
 				       	{
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/product");
+				        window.location.assign("http://digidirect.dev.ph/index.php/home/customer");
 				       	},
 				error: function (XMLHttpRequest, textStatus, errorThrown)
 				          { 
@@ -106,42 +126,52 @@
 		    		<a href="http://digidirect.dev.ph/index.php/home/index" class="menu">
 		    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
-		    		<p class="active">
-		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="active"> 
-		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </a></p>
+		    		<p class="menu">
+		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="menu"> 
+		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
 
 		    		<p class="menu">
 		    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
 		    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
-		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/customer" class="menu"> 
+		    		<p class="active">
 		    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 		    	</div>
 
-		    	<div class="col-md-4">
+		    	<div class="col-md-6">
 					<div class="panel-heading">
-                        <h3 class="heading">Edit Product</h3>
+                        <h3 class="heading">Edit Customer</h3>
                     </div>
                     <div class="panel-body">
                         
                             <fieldset>
-                            	<div class="form-group">
-                                    <input id="ProdID" name="ProdID" value="<?php echo $product_id; ?>" type="hidden">
-                                </div>
 
                                 <div class="form-group">
-                                    <input class="form-control" maxlength="30" placeholder="Product Name" id="ProdName" name="txtProdName" type="text" autofocus>
+                                    <h4 id="lbl"> UserID:  </h4> <p id="UserID"> <?php echo $customer_id; ?> </p>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Price" id="Price" name="Price" type="text" autofocus>
+                                    <input class="form-control" maxlength="15" placeholder="Username" id="Username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Stock" id="Stock" name="Stock" type="text" autofocus>
+                                    <input class="form-control" maxlength="20" placeholder="First Name" id="FName" type="text" autofocus>
+                                    <input class="form-control" maxlength="5" placeholder="M.I" id="MName" type="text" autofocus>
+                                    <input class="form-control" maxlength="10" placeholder="Last Name" id="LName" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="10" placeholder="Password" id="Password" type="password" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="50" placeholder="Email Address" id="Email" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="15" placeholder="Contact Number" id="ContactNumber" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="100" placeholder="Address" id="Address" type="text" autofocus>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <div class="address">
-                                  <input type="button" value="Update Product" id="Update" class="btnadd">	 
+                                  <input type="button" value="Update Customer" name="btnAdd" id="Update" class="btnadd">	 
                                   <input type="button" value="Cancel" name="btnCancel" id="Cancel" class="btndelete">      
                                 </div>
                           </fieldset>

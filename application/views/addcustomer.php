@@ -20,60 +20,44 @@
 	    <![endif]-->
 	    <script type="text/javascript">
 	    	$(document).ready(function(){
-	    		var ProdID = $("#ProdID").val();
-	    		$.ajax({
-				url: "/index.php/home/retrieveproduct",
-				       	type: "POST",
-				       	data: {
-				       		ProdID:ProdID
-				       	},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				       	$("#ProdID").val(data[0]["ProdID"])
-				       	$("#ProdName").val(data[0]["ProdName"]);
-				       	$("#Price").val(data[0]["Price"]);
-				       	$("#Stock").val(data[0]["Stock"]);
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          alert("Error Occured!");
-				          }
-				  
-				});
+	    		$("#Add").click(function(){
+	    		var Username = $("#Username").val();
+				var Password = $("#Password").val();
+				var FName = $("#FName").val();
+				var MName = $("#MName").val();
+				var LName = $("#LName").val();
+				var Email = $("#Email").val();
+				var ContactNumber = $("#ContactNumber").val();
+				var Address = $("#Address").val();
 
-	    		$("#Update").click(function(){
-				var ProdName = $("#ProdName").val();
-				var Stock = $("#Stock").val();
-				var Price = $("#Price").val();
 				$.ajax({
-				url: "/index.php/home/updateproduct",
+				url: "/index.php/home/addcustomer",
 				       	type: "POST",
 				       	data: {
-				       	ProdID:ProdID, ProdName:ProdName, Stock:Stock, Price:Price
+				       		"Username":Username, "Password":Password, "FName":FName, "MName":MName, "LName":LName, "Email":Email, "ContactNumber":ContactNumber, "Address":Address
 				       	},
 				       	dataType: "json",
 				       	success: function(data)
 				       	{
-				       	alert("Item Successfully Updated!");
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/product");
+				       	alert("New Item Successfully Added!");
+				        window.location.assign("http://digidirect.dev.ph/index.php/home/customer");
 				       	},
 				error: function (XMLHttpRequest, textStatus, errorThrown)
 				          { 
-				          alert("Error Occured!");
+				          alert(XMLHttpRequest + textStatus + errorThrown);
 				          }
 				  });
 				});
 
 				$("#Cancel").click(function(){
 				$.ajax({
-				url: "/index.php/home/product",
+				url: "/index.php/home/customer",
 				       	type: "POST",
 				       	data: {},
 				       	dataType: "json",
 				       	success: function(data)
 				       	{
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/product");
+				        window.location.assign("http://digidirect.dev.ph/index.php/home/customer");
 				       	},
 				error: function (XMLHttpRequest, textStatus, errorThrown)
 				          { 
@@ -106,42 +90,49 @@
 		    		<a href="http://digidirect.dev.ph/index.php/home/index" class="menu">
 		    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
-		    		<p class="active">
-		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="active"> 
-		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </a></p>
+		    		<p class="menu">
+		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="menu"> 
+		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
 
 		    		<p class="menu">
 		    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
 		    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
-		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/customer" class="menu"> 
+		    		<p class="active">
 		    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 		    	</div>
 
-		    	<div class="col-md-4">
+		    	<div class="col-md-6">
 					<div class="panel-heading">
-                        <h3 class="heading">Edit Product</h3>
+                        <h3 class="heading">Add Customer</h3>
                     </div>
                     <div class="panel-body">
                         
                             <fieldset>
-                            	<div class="form-group">
-                                    <input id="ProdID" name="ProdID" value="<?php echo $product_id; ?>" type="hidden">
-                                </div>
-
                                 <div class="form-group">
-                                    <input class="form-control" maxlength="30" placeholder="Product Name" id="ProdName" name="txtProdName" type="text" autofocus>
+                                    <input class="form-control" maxlength="15" placeholder="Username" id="Username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Price" id="Price" name="Price" type="text" autofocus>
+                                    <input class="form-control" maxlength="20" placeholder="First Name" id="FName" type="text" autofocus>
+                                    <input class="form-control" maxlength="5" placeholder="M.I" id="MName" type="text" autofocus>
+                                    <input class="form-control" maxlength="10" placeholder="Last Name" id="LName" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Stock" id="Stock" name="Stock" type="text" autofocus>
+                                    <input class="form-control" maxlength="10" placeholder="Password" id="Password" type="password" autofocus>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="50" placeholder="Email Address" id="Email" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="15" placeholder="Contact Number" id="ContactNumber" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" maxlength="100" placeholder="Address" id="Address" type="text" autofocus>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <div class="address">
-                                  <input type="button" value="Update Product" id="Update" class="btnadd">	 
+                                  <input type="button" value="Add Customer" name="btnAdd" id="Add" class="btnadd">	 
                                   <input type="button" value="Cancel" name="btnCancel" id="Cancel" class="btndelete">      
                                 </div>
                           </fieldset>

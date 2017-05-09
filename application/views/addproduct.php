@@ -25,7 +25,7 @@
 				var Stock = $("#Stock").val();
 				var Price = $("#Price").val();
 				$.ajax({
-				url: "/index.php/home/add",
+				url: "/index.php/home/addproduct",
 				       	type: "POST",
 				       	data: {
 				       	ProdName:ProdName, Stock:Stock, Price:Price

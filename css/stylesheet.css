@@ -181,12 +181,13 @@ a.active:hover{
 }
 
 table{
-	padding: 10px 20px;
-	width: 80%;
+	width: 100%;
+	margin-top: 10px;
 }
 
 th, td{
 	padding: 5px;
+	text-align: center;
 }
 
 table tr:nth-child(even) {
@@ -206,10 +207,7 @@ table th {
 .addbutton{
 	background-color: #6CA6CD;
 	color: #FFFFFF;	
-	border-radius: 5px;
 	float: right;
-	margin-top: 50px;
-	margin-bottom: 5px;
 	box-shadow:none;
 	border-radius: 5px;
 	border: 0;
@@ -219,7 +217,7 @@ table th {
     word-spacing: 2px;
 }
 
-.addbutton:hover, .btnedit:hover, .btndelete:hover{
+.addbutton:hover, .btnedit:hover, .btndelete:hover, .btnadd:hover{
 	background-color: #d3d3d3;
 	color: #000000;
 }
@@ -269,11 +267,84 @@ table th {
 	padding-top: 20px;
 }
 
-.up{
-	margin-top: 10px;
+.search
+{
+	width: 50%;
+	margin-right: 5px;
+	display: inline-block;
+	float: left;
 }
 
-.test
-{
+#UserID{
+	width: 40%;
+}
+
+#FName{
+	width: 50%;
+	display: inline-block;
+}
+
+#MName{
+	width: 15%;
+	display: inline-block;
+}
+
+#LName{
+	width: 30%;
+	display: inline-block;
+}
+
+#Email{
+	width: 80%;
+}
+
+#ContactNumber{
+	width: 40%;
+}
+
+#Password{
+	width: 30%;
+}
+
+#lbl{
+	display: inline-block;
+}
+
+#UserID{
+	display: inline-block;
+	font-size: 30px;
+}
+
+.qty{
+	width: 70px;
+	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+#total{
+	width: 130px;
+	border: none;
+	text-decoration: none;
+	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	background-color: transparent;
 	
+}
+
+#lbltotal{
+	margin: 10px;
+	display: inline-block;
+	float: right;
+	visibility: hidden;
+}
+
+.header{
+	float: left;
+	display: inline-block;
 }
