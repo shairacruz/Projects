@@ -147,7 +147,7 @@
                             <fieldset>
 
                                 <div class="form-group">
-                                    <h4 id="lbl"> UserID:  </h4> <p id="UserID"> <?php echo $customer_id; ?> </p>
+                                    <h4 id="lbl"> UserID:  </h4> <p> <span id="UsedID" value=""><?php echo $customer_id; ?></span></p>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" maxlength="15" placeholder="Username" id="Username" type="text" autofocus>

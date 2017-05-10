@@ -7,22 +7,22 @@ if ("undefined" == typeof jQuery)throw new Error("Bootstrap's JavaScript require
 this.activeTarget = b, this.clear(); var c = this.selector + '[data-target="' + b + '"],' + this.selector + '[href="' + b + '"]', d = a(c).parents("li").addClass("active"); d.parent(".dropdown-menu").length && (d = d.closest("li.dropdown").addClass("active")), d.trigger("activate.bs.scrollspy")}, b.prototype.clear = function(){a(this.selector).parentsUntil(this.options.target, ".active").removeClass("active")}; var d = a.fn.scrollspy; a.fn.scrollspy = c, a.fn.scrollspy.Constructor = b, a.fn.scrollspy.noConflict = function(){return a.fn.scrollspy = d, this}, a(window).on("load.bs.scrollspy.data-api", function(){a('[data-spy="scroll"]').each(function(){var b = a(this); c.call(b, b.data())})})}(jQuery), + function(a){"use strict"; function b(b){return this.each(function(){var d = a(this), e = d.data("bs.tab"); e || d.data("bs.tab", e = new c(this)), "string" == typeof b && e[b]()})}var c = function(b){this.element = a(b)}; c.VERSION = "3.3.7", c.TRANSITION_DURATION = 150, c.prototype.show = function(){var b = this.element, c = b.closest("ul:not(.dropdown-menu)"), d = b.data("target"); if (d || (d = b.attr("href"), d = d && d.replace(/.*(?=#[^\s]*$)/, "")), !b.parent("li").hasClass("active")){var e = c.find(".active:last a"), f = a.Event("hide.bs.tab", {relatedTarget:b[0]}), g = a.Event("show.bs.tab", {relatedTarget:e[0]}); if (e.trigger(f), b.trigger(g), !g.isDefaultPrevented() && !f.isDefaultPrevented()){var h = a(d); this.activate(b.closest("li"), c), this.activate(h, h.parent(), function(){e.trigger({type:"hidden.bs.tab", relatedTarget:b[0]}), b.trigger({type:"shown.bs.tab", relatedTarget:e[0]})})}}}, c.prototype.activate = function(b, d, e){function f(){g.removeClass("active").find("> .dropdown-menu > .active").removeClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded", !1), b.addClass("active").find('[data-toggle="tab"]').attr("aria-expanded", !0), h?(b[0].offsetWidth, b.addClass("in")):b.removeClass("fade"), b.parent(".dropdown-menu").length && b.closest("li.dropdown").addClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded", !0), e && e()}var g = d.find("> .active"), h = e && a.support.transition && (g.length && g.hasClass("fade") || !!d.find("> .fade").length); g.length && h?g.one("bsTransitionEnd", f).emulateTransitionEnd(c.TRANSITION_DURATION):f(), g.removeClass("in")}; var d = a.fn.tab; a.fn.tab = b, a.fn.tab.Constructor = c, a.fn.tab.noConflict = function(){return a.fn.tab = d, this}; var e = function(c){c.preventDefault(), b.call(a(this), "show")}; a(document).on("click.bs.tab.data-api", '[data-toggle="tab"]', e).on("click.bs.tab.data-api", '[data-toggle="pill"]', e)}(jQuery), + function(a){"use strict"; function b(b){return this.each(function(){var d = a(this), e = d.data("bs.affix"), f = "object" == typeof b && b; e || d.data("bs.affix", e = new c(this, f)), "string" == typeof b && e[b]()})}var c = function(b, d){this.options = a.extend({}, c.DEFAULTS, d), this.$target = a(this.options.target).on("scroll.bs.affix.data-api", a.proxy(this.checkPosition, this)).on("click.bs.affix.data-api", a.proxy(this.checkPositionWithEventLoop, this)), this.$element = a(b), this.affixed = null, this.unpin = null, this.pinnedOffset = null, this.checkPosition()}; c.VERSION = "3.3.7", c.RESET = "affix affix-top affix-bottom", c.DEFAULTS = {offset:0, target:window}, c.prototype.getState = function(a, b, c, d){var e = this.$target.scrollTop(), f = this.$element.offset(), g = this.$target.height(); if (null != c && "top" == this.affixed)return e < c && "top"; if ("bottom" == this.affixed)return null != c?!(e + this.unpin <= f.top) && "bottom":!(e + g <= a - d) && "bottom"; var h = null == this.affixed, i = h?e:f.top, j = h?g:b; return null != c && e <= c?"top":null != d && i + j >= a - d && "bottom"}, c.prototype.getPinnedOffset = function(){if (this.pinnedOffset)return this.pinnedOffset; this.$element.removeClass(c.RESET).addClass("affix"); var a = this.$target.scrollTop(), b = this.$element.offset(); return this.pinnedOffset = b.top - a}, c.prototype.checkPositionWithEventLoop = function(){setTimeout(a.proxy(this.checkPosition, this), 1)}, c.prototype.checkPosition = function(){if (this.$element.is(":visible")){var b = this.$element.height(), d = this.options.offset, e = d.top, f = d.bottom, g = Math.max(a(document).height(), a(document.body).height()); "object" != typeof d && (f = e = d), "function" == typeof e && (e = d.top(this.$element)), "function" == typeof f && (f = d.bottom(this.$element)); var h = this.getState(g, b, e, f); if (this.affixed != h){null != this.unpin && this.$element.css("top", ""); var i = "affix" + (h?"-" + h:""), j = a.Event(i + ".bs.affix"); if (this.$element.trigger(j), j.isDefaultPrevented())return; this.affixed = h, this.unpin = "bottom" == h?this.getPinnedOffset():null, this.$element.removeClass(c.RESET).addClass(i).trigger(i.replace("affix", "affixed") + ".bs.affix")}"bottom" == h && this.$element.offset({top:g - b - f})}}; var d = a.fn.affix; a.fn.affix = b, a.fn.affix.Constructor = c, a.fn.affix.noConflict = function(){return a.fn.affix = d, this}, a(window).on("load", function(){a('[data-spy="affix"]').each(function(){var c = a(this), d = c.data(); d.offset = d.offset || {}, null != d.offsetBottom && (d.offset.bottom = d.offsetBottom), null != d.offsetTop && (d.offset.top = d.offsetTop), b.call(c, d)})})}(jQuery);
         $(document).ready(function(){
 if ($("#graph-data-container").length > 0)
-        {
-        Highcharts.chart('container1', {
-        chart: {
-        plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-                },
-                title: {
-                text: 'Pending Orders'
-                },
-                tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                pie: {
+{
+    Highcharts.chart('container1', {
+    chart: {
+    plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+    },
+        title: {
+            text: 'Pending Orders'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
                 allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
@@ -33,341 +33,113 @@ if ($("#graph-data-container").length > 0)
                                 }
                         }
                 }
-                },
-                series: [{
-                name: 'Status',
-                        colorByPoint: true,
-                        data: [{
-                        name: 'Pending Pickup',
-                                y: 4.77
-                        }, {
-                        name: 'New',
-                                y: 10.38
-                        }, {
-                        name: 'Pending Dispatch',
-                                y: 56.33
-                        }, {
-                        name: 'On Hold',
-                                y: 24.03
-                        }]
+        },
+        series: [{
+        name: 'Status',
+                colorByPoint: true,
+                data: [{
+                name: 'Pending Pickup',
+                        y: 4.77
+                }, {
+                name: 'New',
+                        y: 10.38
+                }, {
+                name: 'Pending Dispatch',
+                        y: 56.33
+                }, {
+                name: 'On Hold',
+                        y: 24.03
                 }]
-                });
-                Highcharts.chart('container3', {
-                chart: {
-                zoomType: 'xy'
-                },
-                        title: {
-                        text: 'Daily Sales - By Date Invoiced '
-                        },
-                        xAxis: [{
-                        categories: ['4', '5', '6', '7', '8', '9',
-                                '10', '11', '12', '13', '14', '15',
-                                '16', '17', '18', '19', '20', '21',
-                                '22', '23', '24', '25', '26', '27',
-                                '28', '29', '30', '31', '1', '2',
-                                '3', '4'],
-                                crosshair: true
-                        }],
-                        yAxis: [{ // Primary yAxis
-                        labels: {
-                        format: '${value}',
-                                style: {
-                                color: Highcharts.getOptions().colors[1]
-                                }
-                        },
-                                title: {
-                                text: 'Total Income',
-                                        style: {
-                                        color: Highcharts.getOptions().colors[1]
-                                        }
-                                }
-                        }, { // Secondary yAxis
-                        title: {
-                        text: 'Product Income',
-                                style: {
-                                color: Highcharts.getOptions().colors[0]
-                                }
-                        },
-                                labels: {
-                                format: '${value}',
-                                        style: {
-                                        color: Highcharts.getOptions().colors[0]
-                                        }
-                                },
-                                opposite: true
-                        }],
-                        tooltip: {
-                        shared: true
-                        },
-                        legend: {
-                        layout: 'vertical',
-                                align: 'left',
-                                x: 82,
-                                verticalAlign: 'top',
-                                y: 50,
-                                floating: true,
-                                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-                        },
-                        series: [{
-                        name: 'Product Income',
-                                type: 'column',
-                                yAxis: 1,
-                                data: [100, 32122, 32312, 2312, 32324, 3214,
-                                        32474, 97362, 74625, 32643, 7364, 2635,
-                                        76352, 6378, 72528, 1389, 2739, 7264,
-                                        32873, 2383, 24839, 25837, 3223, 2783,
-                                        93923, 29328, 30324, 31424, 1728, 2292,
-                                        3328, 43234],
-                                tooltip: {
-                                valuePrefix: '$',
-                                        valueSuffix: ' USD'
-                                }
-
-                        }, {
-                        name: 'Total Income',
-                                type: 'spline',
-                                data: [100, 32122, 32312, 2312, 32324, 3214,
-                                        32474, 97362, 74625, 32643, 7364, 2635,
-                                        76352, 6378, 72528, 1389, 2739, 7264,
-                                        32873, 2383, 24839, 25837, 3223, 2783,
-                                        93923, 29328, 30324, 31424, 1728, 2292,
-                                        3328, 43234],
-                                tooltip: {
-                                valuePrefix: '$',
-                                        valueSuffix: ' USD'
-                                }
-                        }]
-                });
-                $(".highcharts-credits").css("display", "none");
-                $(".highcharts-button-box").css("display", "none");
-                }
-
-$("#Add").click(function () {
-var Username = $("#Username").val();
-        var Password = $("#Password").val();
-        var FName = $("#FName").val();
-        var MName = $("#MName").val();
-        var LName = $("#LName").val();
-        var Email = $("#Email").val();
-        var ContactNumber = $("#ContactNumber").val();
-        var Address = $("#Address").val();
-        $.ajax({
-        url: "/index.php/home/addcustomer",
-                type: "POST",
-                data: {
-                "Username": Username, "Password": Password, "FName": FName, "MName": MName, "LName": LName, "Email": Email, "ContactNumber": ContactNumber, "Address": Address
-                },
-                dataType: "json",
-                success: function (data)
-                {
-                alert("New Item Successfully Added!");
-                        window.location.assign("http://shai.dev.ph/index.php/home/customer");
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown)
-                {
-                alert(XMLHttpRequest + textStatus + errorThrown);
-                }
-        });
-});
-        $("#Cancel").click(function () {
-$.ajax({
-url: "/index.php/home/customer",
-        type: "POST",
-        data: {},
-        dataType: "json",
-        success: function (data)
-        {
-        window.location.assign("http://shai.dev.ph/index.php/home/customer");
+        }]
+    });
+    
+    Highcharts.chart('container3', {
+        chart: {
+            zoomType: 'xy'
         },
-        error: function (XMLHttpRequest, textStatus, errorThrown)
-        {
-        bootbox.alert("Error Occured!");
-        }
-});
-});
-});
-        $.ajax(
-        {
-        url: "/index.php/home/loadusername",
-                type: "POST",
-                data: {},
-                dataType: "json",
-                success: function (data)
-                {
-                $("tbody").children("tr").remove();
-                        for (var i = 0; i < data.length; i++)
-                {
-                var laman = "<option value=" + data[i]['UserID'] + ">" + data[i]['Username'] + "</option>";
-                        $("#username").append(laman);
-                }
-                }
-        });
-        $.ajax({
-        url: "/index.php/home/showproduct",
-                type: "POST",
-                data: {},
-                dataType: "json",
-                success: function (data)
-                {
-                console.log(data);
-                        $("tbody").children("tr").remove();
-                        for (var i = 0; i < data.length; i++)
-                {
-                //alert("narito");
-                var laman = "<tr data-chk=" + data[i]['ProdID'] + ">" +
-                        "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
-                        "<td>" + data[i]['ProdName'] + "</td>" +
-                        "<td> &#8369;" + parseFloat(data[i]['Price']).toFixed(2) +
-                        "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
-                        "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
-                        "<td id=total" + data[i]['ProdID'] + "> </td></tr>";
-                        $("#data").append(laman);
-                        $('#price').change(function () {
-                $('#price').val($('#price').val().toFixed(2));
-                });
-                }
-                $(".qty-list").prop('disabled', false);
-                }
-        });
-        $("#Add").click(function () {
-var Username = $("#Username").val();
-        var Password = $("#Password").val();
-        var FName = $("#FName").val();
-        var MName = $("#MName").val();
-        var LName = $("#LName").val();
-        var Email = $("#Email").val();
-        var ContactNumber = $("#ContactNumber").val();
-        var Address = $("#Address").val();
-        $.ajax({
-        url: "/index.php/home/addcustomer",
-                type: "POST",
-                data: {
-                "Username": Username,
-                        "Password": Password,
-                        "FName": FName,
-                        "MName": MName,
-                        "LName": LName,
-                        "Email": Email,
-                        "ContactNumber": ContactNumber,
-                        "Address": Address
-                },
-                dataType: "json",
-                success: function (data)
-                {
-                alert("New Item Successfully Added!");
-                        window.location.assign("http://shai.dev.ph/index.php/home/customer");
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown)
-                {
-                alert(XMLHttpRequest + textStatus + errorThrown);
-                }
-        });
-});
-        $("#Cancel").click(function () {
-$.ajax({
-url: "/index.php/home/customer",
-        type: "POST",
-        data: {},
-        dataType: "json",
-        success: function (data)
-        {
-        window.location.assign("http://shai.dev.ph/index.php/home/customer");
+        title: {
+            text: 'Daily Sales - By Date Invoiced '
         },
-        error: function (XMLHttpRequest, textStatus, errorThrown)
-        {
-        bootbox.alert("Error Occured!");
-        }
-});
-});
-        $("#search").on("click", function () {
-$("#data").html();
-        var txtSearch = $("#product").val();
-        console.log(txtSearch);
-        $.ajax({
-        url: "/index.php/home/showproductbykeyword",
-                type: "POST",
-                data:
-        {
-        "ProdName": txtSearch
-        },
-                dataType: "json",
-                success: function (data)
-                {
-                $("tbody").children("tr").remove();
-                        for (var i = 0; i < data.length; i++)
-                {
-                var laman = "<tr data-chk=" + data[i]['ProdID'] + ">" +
-                        "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
-                        "<td>" + data[i]['ProdName'] + "</td>" +
-                        "<td> &#8369;" + data[i]['Price'] +
-                        "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
-                        "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
-                        "<td id=total" + data[i]['ProdID'] + "> </td></tr>";
-                        $("#data").append(laman);
-                        $('#price').change(function () {
-                $('#price').val($('#price').val().toFixed(2));
-                });
-                }
-                }
-        });
-});
-        var qty = [];
-        var costprice = [];
-        $("#saveorder").on("click", function ()
-{
+            xAxis: [{
+            categories: ['4', '5', '6', '7', '8', '9',
+                    '10', '11', '12', '13', '14', '15',
+                    '16', '17', '18', '19', '20', '21',
+                    '22', '23', '24', '25', '26', '27',
+                    '28', '29', '30', '31', '1', '2',
+                    '3', '4'],
+                    crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+            labels: {
+            format: '${value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+            },
+                    title: {
+                    text: 'Total Income',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+            }, { // Secondary yAxis
+            title: {
+            text: 'Product Income',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+            },
+                    labels: {
+                    format: '${value}',
+                            style: {
+                            color: Highcharts.getOptions().colors[0]
+                            }
+                    },
+                    opposite: true
+            }],
+            tooltip: {
+            shared: true
+            },
+            legend: {
+            layout: 'vertical',
+                    align: 'left',
+                    x: 82,
+                    verticalAlign: 'top',
+                    y: 50,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [{
+            name: 'Product Income',
+                    type: 'column',
+                    yAxis: 1,
+                    data: [100, 32122, 32312, 2312, 32324, 3214,
+                            32474, 97362, 74625, 32643, 7364, 2635,
+                            76352, 6378, 72528, 1389, 2739, 7264,
+                            32873, 2383, 24839, 25837, 3223, 2783,
+                            93923, 29328, 30324, 31424, 1728, 2292,
+                            3328, 43234],
+                    tooltip: {
+                    valuePrefix: '$',
+                            valueSuffix: ' USD'
+                    }
 
-event.preventDefault();
-        var product = $("input.product-list:checkbox:checked").map(function ()
-{
-return $(this).val();
-}).get();
-        qty.splice(0, qty.length);
-        for (var i = 0, l = product.length; i < l; i++)
-{
-qty.push($("#" + product[i]).val());
-}
-//console.log(product);
-//console.log(qty);
-//console.log(costprice);
-});
-        $("#product-table").on("change", ".product-list", function ()
-{
-var checked_value = $(this).val();
-        if (this.checked)
-{
-$("#" + checked_value).prop('disabled', false);
-        $("#" + checked_value).removeClass('qty-disabled');
-} else
-{
-$("#" + checked_value).prop('disabled', true);
-        $("#" + checked_value).addClass('qty-disabled');
+            }, {
+            name: 'Total Income',
+                    type: 'spline',
+                    data: [100, 32122, 32312, 2312, 32324, 3214,
+                            32474, 97362, 74625, 32643, 7364, 2635,
+                            76352, 6378, 72528, 1389, 2739, 7264,
+                            32873, 2383, 24839, 25837, 3223, 2783,
+                            93923, 29328, 30324, 31424, 1728, 2292,
+                            3328, 43234],
+                    tooltip: {
+                    valuePrefix: '$',
+                            valueSuffix: ' USD'
+                    }
+            }]
+    });
+    $(".highcharts-credits").css("display", "none");
+    $(".highcharts-button-box").css("display", "none");
 }
 });
-        $("#product-table").on("keyup", ".qty", function ()
-{
-var cost = 0;
-        var qty = $(this).val();
-        var element = $(this).attr("id");
-        var price = $("#price" + element).val();
-        cost = price * qty;
-        cost.toFixed(2);
-        costprice.push(cost);
-        $("#total" + element).html(cost);
-        //console.log(qty);
-        //console.log(costprice);
-        var totalPrice = getTotal();
-        //console.log(totalPrice);
-        $("#totalPrice").html(totalPrice);
-});
-        function getTotal() {
-        var total = 0;
-                var i = 0;
-                while (costprice.length > i) {
-        total += costprice[i];
-                i++;
-        }
-        return total;
-        }
-
-});
-        });

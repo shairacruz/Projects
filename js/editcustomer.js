@@ -4,7 +4,7 @@ $(document).ready(function () {
         url: "/index.php/home/retrievecustomer",
         type: "POST",
         data: {
-            UserID: UserID
+            "UserID": UserID
         },
         dataType: "json",
         success: function (data)
