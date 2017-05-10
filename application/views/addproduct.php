@@ -9,8 +9,8 @@
 	    <title>Add Product</title>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <!-- Bootstrap -->
-	    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
-	    <link href="<?php echo base_url(); ?>css/stylesheet.css" rel="stylesheet">
+	    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="/css/stylesheet.css" rel="stylesheet">
 
 	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +34,7 @@
 				       	success: function(data)
 				       	{
 				       	alert("New Item Successfully Added!");
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/product");
+				        window.location.assign("http://shai.dev.ph/index.php/home/product");
 				       	},
 				error: function (XMLHttpRequest, textStatus, errorThrown)
 				          { 
@@ -51,7 +51,7 @@
 				       	dataType: "json",
 				       	success: function(data)
 				       	{
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/product");
+				        window.location.assign("http://shai.dev.ph/index.php/home/product");
 				       	},
 				error: function (XMLHttpRequest, textStatus, errorThrown)
 				          { 
@@ -68,33 +68,33 @@
 		<div class="container-fluid no-gutter">
 	    	<div class="col-xs-12 no-gutter">
 		    	<div class="col-md-6 head">
-		    		<p> <a href="#" class="nounderline"> <img src="<?php echo base_url(); ?>images/new.png" />&nbsp;&nbsp;New </a>
-		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/view.png" />&nbsp;&nbsp;View my Website </a>
-		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/support.png" />&nbsp;&nbsp;Get Support </a></p> 
+		    		<p> <a href="#" class="nounderline"> <img src="/images/new.png" />&nbsp;&nbsp;New </a>
+		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/view.png" />&nbsp;&nbsp;View my Website </a>
+		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/support.png" />&nbsp;&nbsp;Get Support </a></p> 
 		    	</div>
 
 		    	<div class="col-md-6 head">
-		     		<p id="dp"> <img src="<?php echo base_url(); ?>images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </p> 
+		     		<p id="dp"> <img src="/images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </p> 
 		    	</div>
 			</div>
 
 			<div class="col-xs-12 no-gutter nav">
 		    	<div class="col-md-2 no-gutter">
 		    		<p id="dashboard1"> 
-		    		<a href="http://digidirect.dev.ph/index.php/home/index" class="menu">
-		    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
+		    		<a href="http://shai.dev.ph/index.php/home/index" class="menu">
+		    		<img src="/images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
 		    		<p class="active">
-		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="active"> 
-		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </a></p>
+		    		<a href="http://shai.dev.ph/index.php/home/product" class="active"> 
+		    		<img src="/images/blog.png" />&nbsp;&nbsp;&nbsp;Products </a></p>
 
 		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
-		    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
+		    		<a href="http://shai.dev.ph/index.php/home/order" class="menu"> 
+		    		<img src="/images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
 		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/customer" class="menu"> 
-		    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
+		    		<a href="http://shai.dev.ph/index.php/home/customer" class="menu"> 
+		    		<img src="/images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 		    	</div>
 
 		    	<div class="col-md-4">
@@ -133,7 +133,7 @@
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-	    <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-	    <script src="<?php echo base_url(); ?>js/custom.js"></script>
+	    <script src="/js/bootstrap.min.js"></script>
+	    <script src="/js/custom.js"></script>
   	</body>
 </html>

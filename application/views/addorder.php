@@ -9,8 +9,8 @@
 	    <title>Add Order</title>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <!-- Bootstrap -->
-	    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
-	    <link href="<?php echo base_url(); ?>css/stylesheet.css" rel="stylesheet">
+	    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="/css/stylesheet.css" rel="stylesheet">
 
 	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,147 +20,171 @@
 	    <![endif]-->
 	    <script type="text/javascript">
 	    	$(document).ready(function(){
-	    		var price = 0;
-	    		$.ajax(
-				{
-					url: "/index.php/home/loadusername",
-				       type: "POST",
-				       data: {},
-				       dataType: "json",
-				       success: function(data)
-				       {
-					        $("tbody").children("tr").remove();
-					       	for (var i = 0; i < data.length; i++)
-					       	{
-					       	var laman = "<option value=" + data[i]['UserID'] +">"+data[i]['Username']+"</option>";
-					       	$("#username").append(laman);
-				       	}
-				    }
-				});
+                    $.ajax(
+                    {
+                            url: "/index.php/home/loadusername",
+                           type: "POST",
+                           data: {},
+                           dataType: "json",
+                           success: function(data)
+                           {
+                                    $("tbody").children("tr").remove();
+                                    for (var i = 0; i < data.length; i++)
+                                    {
+                                    var laman = "<option value=" + data[i]['UserID'] +">"+data[i]['Username']+"</option>";
+                                    $("#username").append(laman);
+                            }
+                        }
+                    });
 
-				$.ajax({
-				   url: "/index.php/home/showproduct",
-			       type: "POST",
-			       data: {},
-			       dataType: "json",
-			       success: function(data)
-			       {
-				        console.log(data);
-				        $("tbody").children("tr").remove();
-				       	for (var i = 0; i < data.length; i++)
-				       	{
-				       		//alert("narito");
-					       	var laman = "<tr data-chk=" + data[i]['ProdID'] +"><td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td><td>"+data[i]['ProdName']+"</td><td>&#8369; "+data[i]['Price']+"</td> <td><input id="+data[i]['ProdID']+" name='qty["+data[i]['ProdID']+"]' id=" + data[i]['ProdID'] +"class='form-control qty qty-list' type='text'/></td><td id='total'> </td></tr>";
-					       	
-					       	$("#data").append(laman);
-					       	$('#price').change(function() {
-	  							$('#price').val( $('#price').val().toFixed(2));
-							});
-			       		}
-			    	}
-			    });
+                    $.ajax({
+                       url: "/index.php/home/showproduct",
+                   type: "POST",
+                   data: {},
+                   dataType: "json",
+                   success: function(data)
+                   {
+                            console.log(data);
+                            $("tbody").children("tr").remove();
+                            for (var i = 0; i < data.length; i++)
+                            {
+                                //alert("narito");
+                                var laman = "<tr data-chk=" + data[i]['ProdID'] + ">"+
+                                "<td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td>"+
+                                "<td>"+data[i]['ProdName']+"</td>"+
+                                "<td> &#8369;"+data[i]['Price']+
+                                "<input type=hidden value="+data[i]['Price']+" id=price"+ data[i]['ProdID'] +"></td>"+
+                                "<td><input id="+data[i]['ProdID'] +" class='form-control qty qty-list' type='text'/></td>"+
+                                "<td id=total"+data[i]['ProdID'] +"> </td></tr>";
+                                $("#data").append(laman);
+                                $('#price').change(function() {
+                                    $('#price').val( $('#price').val().toFixed(2));
+                                });
+                            }
+                        }
+                    });
 
-	    		$("#Add").click(function(){
-	    		var Username = $("#Username").val();
-				var Password = $("#Password").val();
-				var FName = $("#FName").val();
-				var MName = $("#MName").val();
-				var LName = $("#LName").val();
-				var Email = $("#Email").val();
-				var ContactNumber = $("#ContactNumber").val();
-				var Address = $("#Address").val();
+                    $("#Add").click(function(){
+                        var Username = $("#Username").val();
+                        var Password = $("#Password").val();
+                        var FName = $("#FName").val();
+                        var MName = $("#MName").val();
+                        var LName = $("#LName").val();
+                        var Email = $("#Email").val();
+                        var ContactNumber = $("#ContactNumber").val();
+                        var Address = $("#Address").val();
 
-				$.ajax({
-				url: "/index.php/home/addcustomer",
-				       	type: "POST",
-				       	data: {
-				       		"Username":Username, "Password":Password, "FName":FName, "MName":MName, "LName":LName, "Email":Email, "ContactNumber":ContactNumber, "Address":Address
-				       	},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				       	alert("New Item Successfully Added!");
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/customer");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          alert(XMLHttpRequest + textStatus + errorThrown);
-				          }
-				  });
-				});
+                        $.ajax({
+                        url: "/index.php/home/addcustomer",
+                                type: "POST",
+                                data: {
+                                        "Username":Username, 
+                                        "Password":Password, 
+                                        "FName":FName, 
+                                        "MName":MName, 
+                                        "LName":LName, 
+                                        "Email":Email, 
+                                        "ContactNumber":ContactNumber, 
+                                        "Address":Address
+                                },
+                                dataType: "json",
+                                success: function(data)
+                                {
+                                alert("New Item Successfully Added!");
+                                window.location.assign("http://shai.dev.ph/index.php/home/customer");
+                                },
+                        error: function (XMLHttpRequest, textStatus, errorThrown)
+                                  { 
+                                  alert(XMLHttpRequest + textStatus + errorThrown);
+                                  }
+                          });
+                        });
 
-				$("#Cancel").click(function(){
-				$.ajax({
-				url: "/index.php/home/customer",
-				       	type: "POST",
-				       	data: {},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				        window.location.assign("http://digidirect.dev.ph/index.php/home/customer");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          bootbox.alert("Error Occured!");
-				          }
-				  });
-				});
+                    $("#Cancel").click(function(){
+                    $.ajax({
+                    url: "/index.php/home/customer",
+                            type: "POST",
+                            data: {},
+                            dataType: "json",
+                            success: function(data)
+                            {
+                            window.location.assign("http://shai.dev.ph/index.php/home/customer");
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown)
+                            { 
+                            bootbox.alert("Error Occured!");
+                            }
+                        });
+                    });
 
-				$("#search").on("click", function(){
-					$("#data").html();
-					var txtSearch = $("#product").val();
-					console.log(txtSearch); 
-					$.ajax({
-					   url: "/index.php/home/showproductbykeyword",
-				       type: "POST",
-				       data:
-				        {
-				       		"ProdName":txtSearch
-				       },
-				       dataType: "json",
-				       success: function(data)
-				       {
-					        $("tbody").children("tr").remove();
-					       	for (var i = 0; i < data.length; i++)
-					       	{
-						       	var laman = "<tr data-chk=" + data[i]['ProdID'] +"><td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td><td>"+data[i]['ProdName']+"</td><td>&#8369; "+data[i]['Price']+"</td> <td><input id="+data[i]['ProdID']+" name='qty["+data[i]['ProdID']+"]' id=" + data[i]['ProdID'] +"class='form-control qty qty-list' type='text'/></td><td id='total'> </td></tr>";
+                    $("#search").on("click", function(){
+                            $("#data").html();
+                            var txtSearch = $("#product").val();
+                            console.log(txtSearch); 
+                            $.ajax({
+                               url: "/index.php/home/showproductbykeyword",
+                           type: "POST",
+                           data:
+                            {
+                                    "ProdName":txtSearch
+                           },
+                           dataType: "json",
+                           success: function(data)
+                           {
+                                $("tbody").children("tr").remove();
+                                for (var i = 0; i < data.length; i++)
+                                {
+                                    var laman = "<tr data-chk=" + data[i]['ProdID'] + ">"+
+                                    "<td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td>"+
+                                    "<td>"+data[i]['ProdName']+"</td>"+
+                                    "<td id=price"+ data[i]['ProdID'] +" value="+data[i]['Price']+">&#8369; "+data[i]['Price']+"</td>"+
+                                    "<td><input id="+data[i]['ProdID'] +" class='form-control qty qty-list' type='text'/></td>"+
+                                    "<td id='total'> </td></tr>";
+                                    $("#data").append(laman);
+                                    $('#price').change(function() {
+                                        $('#price').val( $('#price').val().toFixed(2));
+                                    });
+                                }
+                            }
+                        });				
+                    });
 
-						       	$("#data").append(laman);
-						       	$('#price').change(function() {
-		  							$('#price').val( $('#price').val().toFixed(2));
-								});
-				       		}
-				    	}
-			    	});				
-				});
+                    $("#saveorder").on("click", function()
+                    {
+                        var product = [];
+                        var qty = [];
+                        var price = $("#price11").val();
+                        event.preventDefault();
+                        var product = $("input.product-list:checkbox:checked").map(function()
+                        {
+                          return $(this).val();
+                        }).get();
+                        for ( var i = 0, l = product.length; i < l; i++ )
+                        {
+                            qty.push($("#" + product[i]).val());
+                        }
+                        console.log(product);
+                        console.log(qty);
+                        console.log(price);
+                    });
 
-				$("#saveorder").on("click", function()
-				{
-			    	event.preventDefault();
-				    var product = $("input.product-list:checkbox:checked").map(function()
-				    {
-				      return $(this).val();
-				    }).get();
-
-				    var qty = [];
-				    for ( var i = 0, l = product.length; i < l; i++ )
-				    {
-					    qty.push($("#" + product[i]).val());
-					}
-
-					console.log(product);
-					console.log(qty);
-				});
-
-				setTimeout(function(){ 
-						$(".qty-list").keyup(function(){
-							var cost = 0;
-							var price = $(this).attr("id")
-							cost = $(this.val())*
-					});
-				}, 2000);
-	    });
-
+                    $("#product-table").on("keyup", ".qty", function()
+                    {
+                        //var running_value = $(this).val();
+                        //console.log(running_value);
+                        var cost = 0;
+                        var qty = $(this).val();
+                        var element = $(this).attr("id");
+                        var price = $("#price"+element).val();
+                        cost = price*qty;
+                        cost.toFixed(2);
+                        
+                        $("#total"+element).html(cost);
+                        
+//                        cost = price*qty;
+//                        console.log(cost);
+                    });                           	
+                });
 	    </script>
 	</head>
 	<body>
@@ -168,29 +192,29 @@
 		<div class="container-fluid no-gutter">
 	    	<div class="col-xs-12 no-gutter">
 		    	<div class="col-md-12 head">
-		    		<p> <a href="#" class="nounderline"> <img src="<?php echo base_url(); ?>images/new.png" />&nbsp;&nbsp;New </a>
-		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/view.png" />&nbsp;&nbsp;View my Website </a>
-		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/support.png" />&nbsp;&nbsp;Get Support </a>
-		    		<span id="dp"><img src="<?php echo base_url(); ?>images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </span></p> 
+		    		<p> <a href="#" class="nounderline"> <img src="/images/new.png" />&nbsp;&nbsp;New </a>
+		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/view.png" />&nbsp;&nbsp;View my Website </a>
+		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/support.png" />&nbsp;&nbsp;Get Support </a>
+		    		<span id="dp"><img src="/images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </span></p> 
 		    	</div>
 			</div>
 
 			<div class="col-xs-12 no-gutter nav">
 		    	<div class="col-md-2 no-gutter">
 		    		<p id="dashboard1"> 
-		    		<a href="http://digidirect.dev.ph/index.php/home/index" class="menu">
-		    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
+		    		<a href="http://shai.dev.ph/index.php/home/index" class="menu">
+		    		<img src="/images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
 		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/product" class="menu"> 
-		    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
+		    		<a href="http://shai.dev.ph/index.php/home/product" class="menu"> 
+		    		<img src="/images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
 
 		    		<p class="menu">
-		    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
-		    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
+		    		<a href="http://shai.dev.ph/index.php/home/order" class="menu"> 
+		    		<img src="/images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
 		    		<p class="active">
-		    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
+		    		<img src="/images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 		    	</div>
 
 		    	<div class="col-md-10 no-gutter">
@@ -219,7 +243,7 @@
 												<th> &nbsp;&nbsp;</th>
 												<th> Product Name </th>
 												<th id="price"> Price </th>
-												<th> Qty </th>
+												<th id="qty"> Qty </th>
 												<th id="price"> Cost Price </th>
 											</tr>
 											</thead>
@@ -235,7 +259,7 @@
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-	    <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-	    <script src="<?php echo base_url(); ?>js/custom.js"></script>
+	    <script src="/js/bootstrap.min.js"></script>
+	    <script src="/js/custom.js"></script>
   	</body>
 </html>
