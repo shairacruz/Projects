@@ -9,9 +9,9 @@
     <title>Admin</title>
 
     <!-- Bootstrap -->
-    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!--<link href="css/stylesheet.css" rel="stylesheet">-->
-    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/stylesheet.css">
+    <link rel = "stylesheet" type = "text/css" href = "/css/stylesheet.css">
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,32 +26,32 @@
     <div class="container-fluid no-gutter">
     	<div class="col-xs-12 no-gutter" id="links">
 	    	<div class="col-md-6 head" id="header">
-	    		<p> <a href="#" class="nounderline"> <img src="<?php echo base_url(); ?>images/new.png" />&nbsp;&nbsp;New </a>
-	    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/view.png" />&nbsp;&nbsp;View my Website </a>
-	    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/support.png" />&nbsp;&nbsp;Get Support </a></p> 
+	    		<p> <a href="#" class="nounderline"> <img src="/images/new.png" />&nbsp;&nbsp;New </a>
+	    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/view.png" />&nbsp;&nbsp;View my Website </a>
+	    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/support.png" />&nbsp;&nbsp;Get Support </a></p> 
 	    	</div>
 
 	    	<div class="col-md-6 head" id="profile">
-	     		<p id="dp"> <img src="<?php echo base_url(); ?>images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </p> 
+	     		<p id="dp"> <img src="/images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </p> 
 	    	</div>
 		</div>
 
 		<div class="col-xs-12 no-gutter nav">
 	    	<div class="col-md-2 no-gutter" id="nav">
 	    		<p id="dashboard"> 
-	    		<img src="<?php echo base_url(); ?>images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
+	    		<img src="/images/dashboard.png" />&nbsp;&nbsp;&nbsp;Dashboard </a></p>
 
 	    		<p class="menu active">
-	    		<a href="http://digidirect.dev.ph/index.php/home/product" class="menu"> 
-	    		<img src="<?php echo base_url(); ?>images/blog.png" />&nbsp;&nbsp;&nbsp;Products </a></p>
+	    		<a href="http://shai.dev.ph/index.php/Home/product" class="menu"> 
+	    		<img src="/images/blog.png" />&nbsp;&nbsp;&nbsp;Products </a></p>
 
 	    		<p class="menu">
-	    		<a href="http://digidirect.dev.ph/index.php/home/order" class="menu"> 
-	    		<img src="<?php echo base_url(); ?>images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
+	    		<a href="http://shai.dev.ph/index.php/Home/order" class="menu"> 
+	    		<img src="/images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
 	    		<p class="menu">
-	    		<a href="http://digidirect.dev.ph/index.php/home/customer" class="menu"> 
-	    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
+	    		<a href="http://shai.dev.ph/index.php/Home/customer" class="menu"> 
+	    		<img src="/images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 	    	</div>
 	    	<div class="col-md-10" id="graph-data-container">
 
@@ -86,12 +86,12 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <!--<script src="js/custom.js"></script>-->
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-    <script type = 'text/javascript' src = "<?php echo base_url(); ?>js/custom.js"></script>
+    <script type = 'text/javascript' src = "/js/custom.js"></script>
  
   </body>
 </html>
