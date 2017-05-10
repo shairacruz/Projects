@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	    <title>Add Product</title>
+	    <title>Edit Product</title>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <!-- Bootstrap -->
 	    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">

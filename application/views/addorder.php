@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	    <title>Add Product</title>
+	    <title>Add Order</title>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <!-- Bootstrap -->
 	    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 	    <![endif]-->
 	    <script type="text/javascript">
 	    	$(document).ready(function(){
-	    		var cost = 0;
+	    		var price = 0;
 	    		$.ajax(
 				{
 					url: "/index.php/home/loadusername",
@@ -50,7 +50,7 @@
 				       	for (var i = 0; i < data.length; i++)
 				       	{
 				       		//alert("narito");
-					       	var laman = "<tr data-chk=" + data[i]['ProdID'] +"><td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td><td>"+data[i]['ProdName']+"</td><td>&#8369; "+data[i]['Price']+"</td> <td><input id="+data[i]['ProdID']+" name='qty["+data[i]['ProdID']+"]' id=" + data[i]['ProdID'] +"class='form-control qty qty-list' type='text'/></td><td> <input type='text' class='form-control' id='total'> </td></tr>";
+					       	var laman = "<tr data-chk=" + data[i]['ProdID'] +"><td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td><td>"+data[i]['ProdName']+"</td><td>&#8369; "+data[i]['Price']+"</td> <td><input id="+data[i]['ProdID']+" name='qty["+data[i]['ProdID']+"]' id=" + data[i]['ProdID'] +"class='form-control qty qty-list' type='text'/></td><td id='total'> </td></tr>";
 					       	
 					       	$("#data").append(laman);
 					       	$('#price').change(function() {
@@ -123,7 +123,7 @@
 					        $("tbody").children("tr").remove();
 					       	for (var i = 0; i < data.length; i++)
 					       	{
-						       	var laman = "<tr data-chk=" + data[i]['ProdID'] +"><td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td><td>"+data[i]['ProdName']+"</td><td>&#8369; "+data[i]['Price']+"</td> <td><input id="+data[i]['ProdID']+" name='qty["+data[i]['ProdID']+"]' id=" + data[i]['ProdID'] +"class='form-control qty qty-list' type='text'/></td><td> <input type='text' class='form-control' id='total'> </td></tr>";
+						       	var laman = "<tr data-chk=" + data[i]['ProdID'] +"><td> <input class='product-list' type= 'checkbox' name='product[]' value="+data[i]['ProdID']+"></td><td>"+data[i]['ProdName']+"</td><td>&#8369; "+data[i]['Price']+"</td> <td><input id="+data[i]['ProdID']+" name='qty["+data[i]['ProdID']+"]' id=" + data[i]['ProdID'] +"class='form-control qty qty-list' type='text'/></td><td id='total'> </td></tr>";
 
 						       	$("#data").append(laman);
 						       	$('#price').change(function() {
@@ -150,24 +150,15 @@
 
 					console.log(product);
 					console.log(qty);
-
-				     // <----
-				    //console.log($('#id[]').attr("data-chk"));
-				    // console.log(product);
-
-				    // var qty = $('input.qty-list').map(function()
-				    // {
-				    // 	return $(this).val();
-				    // }).get(); // <----
-
-				    // for (var i = 0; i >= qty.length; i++) {
-			     //  		if (qty[i] == ""){
-			     //  			var index = array.indexOf(qty);
-			     //  			qty[i].splice(index, i);
-			     //  		}
-			     //  	}
-				    // console.log(qty);
 				});
+
+				setTimeout(function(){ 
+						$(".qty-list").keyup(function(){
+							var cost = 0;
+							var price = $(this).attr("id")
+							cost = $(this.val())*
+					});
+				}, 2000);
 	    });
 
 	    </script>
@@ -176,14 +167,11 @@
 
 		<div class="container-fluid no-gutter">
 	    	<div class="col-xs-12 no-gutter">
-		    	<div class="col-md-6 head">
+		    	<div class="col-md-12 head">
 		    		<p> <a href="#" class="nounderline"> <img src="<?php echo base_url(); ?>images/new.png" />&nbsp;&nbsp;New </a>
 		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/view.png" />&nbsp;&nbsp;View my Website </a>
-		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/support.png" />&nbsp;&nbsp;Get Support </a></p> 
-		    	</div>
-
-		    	<div class="col-md-6 head">
-		     		<p id="dp"> <img src="<?php echo base_url(); ?>images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </p> 
+		    		<a href="#" class="nounderline">&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo base_url(); ?>images/support.png" />&nbsp;&nbsp;Get Support </a>
+		    		<span id="dp"><img src="<?php echo base_url(); ?>images/dp.png" />&nbsp;&nbsp;&nbsp;Cruz, Shaira Yvonne A. </span></p> 
 		    	</div>
 			</div>
 
@@ -205,19 +193,17 @@
 		    		<img src="<?php echo base_url(); ?>images/pages.png" />&nbsp;&nbsp;&nbsp;View Customer </a></p>
 		    	</div>
 
-		    	<div class="col-md-10">
+		    	<div class="col-md-10 no-gutter">
 					<div class="panel-heading">
                         <h3 class="header">Add Order</h3>
                         <h1 id="lbltotal">Total: &#8369; <?php echo 0 ?> </h1>
                     </div>
-                <div class="col-md-12">
-                    <div class="panel-body">
+                    <div class="panel-body no no-gutter">
                     	<form>
-                            <fieldset>
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <select class="form-control" placeholder="Username" id="username" autofocus>
-                                    </select>
+                                    <p><select class="form-control search" placeholder="Username" id="username" autofocus>
+                                    </select></p>
                                 </div>
 	                            </div>
 	                                <div class="col-md-12">
@@ -241,17 +227,10 @@
 											
 										</table>
 							    </div>
-	                        </fieldset>
                     	</form>
-                    </div>
-		    	</div>
-
-		    	<div class="col-md-6">
-
-		    	</div>
-
-			</div>
-	    </div>
+		    		</div>
+				</div>
+	    	</div>
 
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
