@@ -18,56 +18,6 @@
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script type="text/javascript">
-	    	$(document).ready(function(){
-	    		$("#Add").click(function(){
-	    		var Username = $("#Username").val();
-				var Password = $("#Password").val();
-				var FName = $("#FName").val();
-				var MName = $("#MName").val();
-				var LName = $("#LName").val();
-				var Email = $("#Email").val();
-				var ContactNumber = $("#ContactNumber").val();
-				var Address = $("#Address").val();
-
-				$.ajax({
-				url: "/index.php/home/addcustomer",
-				       	type: "POST",
-				       	data: {
-				       		"Username":Username, "Password":Password, "FName":FName, "MName":MName, "LName":LName, "Email":Email, "ContactNumber":ContactNumber, "Address":Address
-				       	},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				       	alert("New Item Successfully Added!");
-				        window.location.assign("http://shai.dev.ph/index.php/home/customer");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          alert(XMLHttpRequest + textStatus + errorThrown);
-				          }
-				  });
-				});
-
-				$("#Cancel").click(function(){
-				$.ajax({
-				url: "/index.php/home/customer",
-				       	type: "POST",
-				       	data: {},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				        window.location.assign("http://shai.dev.ph/index.php/home/customer");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          bootbox.alert("Error Occured!");
-				          }
-				  });
-				});
-	    	});
-
-	    </script>
 	</head>
 	<body>
 
@@ -151,6 +101,6 @@
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 	    <script src="/js/bootstrap.min.js"></script>
-	    <script src="/js/custom.js"></script>
+	    <script src="/js/addcustomer.js"></script>
   	</body>
 </html>

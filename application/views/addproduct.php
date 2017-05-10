@@ -18,50 +18,6 @@
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script type="text/javascript">
-	    	$(document).ready(function(){
-	    		$("#Add").click(function(){
-				var ProdName = $("#ProdName").val();
-				var Stock = $("#Stock").val();
-				var Price = $("#Price").val();
-				$.ajax({
-				url: "/index.php/home/addproduct",
-				       	type: "POST",
-				       	data: {
-				       	ProdName:ProdName, Stock:Stock, Price:Price
-				       	},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				       	alert("New Item Successfully Added!");
-				        window.location.assign("http://shai.dev.ph/index.php/home/product");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          alert("Error Occured!");
-				          }
-				  });
-				});
-
-				$("#Cancel").click(function(){
-				$.ajax({
-				url: "/index.php/home/product",
-				       	type: "POST",
-				       	data: {},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				        window.location.assign("http://shai.dev.ph/index.php/home/product");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          bootbox.alert("Error Occured!");
-				          }
-				  });
-				});
-	    	});
-
-	    </script>
 	</head>
 	<body>
 
@@ -134,6 +90,6 @@
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 	    <script src="/js/bootstrap.min.js"></script>
-	    <script src="/js/custom.js"></script>
+	    <script src="/js/addproduct.js"></script>
   	</body>
 </html>
