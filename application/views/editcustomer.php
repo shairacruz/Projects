@@ -18,92 +18,6 @@
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script type="text/javascript">
-	    	$(document).ready(function(){
-	    		var UserID = <?php echo $customer_id; ?>;
-	    		$.ajax({
-				url: "/index.php/home/retrievecustomer",
-				       	type: "POST",
-				       	data: {
-				       		UserID:UserID
-				       	},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				       		$("#Username").val(data[0]["Username"]);
-							$("#Password").val(data[0]["Password"]);
-							$("#FName").val(data[0]["FName"]);
-							$("#MName").val(data[0]["MName"]);
-							$("#LName").val(data[0]["LName"]);
-							$("#Email").val(data[0]["Email"]);
-							$("#ContactNumber").val(data[0]["ContactNumber"]);
-							$("#Address").val(data[0]["Address"]);
-						},
-						error: function (XMLHttpRequest, textStatus, errorThrown)
-			          	{ 
-			          	alert(XMLHttpRequest+ textStatus+ errorThrown);
-			          	}
-					  
-					});
-
-				$("#Update").on("click", function(){
-					var UserID = <?php echo $customer_id; ?>;
-					var Username = $("#Username").val();
-					var Password = $("#Password").val();
-					var FName = $("#FName").val();
-					var MName = $("#MName").val();
-					var LName = $("#LName").val();
-					var Email = $("#Email").val();
-					var ContactNumber = $("#ContactNumber").val();
-					var Address = $("#Address").val();
-					$.ajax(
-					{
-						url: "/index.php/home/updatecustomer",
-				       	type: "POST",
-				       	data:
-				       	{ 
-				       		"UserID":UserID,
-				       		"Username":Username,
-					       	"Password": Password,
-					       	"FName": FName, 
-					       	"MName": MName, 
-					       	"LName": LName, 
-					       	"Email": Email, 
-					       	"ContactNumber": ContactNumber, 
-					       	"Address": Address
-				       	},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-					       	alert("Item Successfully Updated!");
-					        window.location.assign("http://shai.dev.ph/index.php/home/customer");
-				       	},
-						error: function (XMLHttpRequest, textStatus, errorThrown)
-				        { 
-				        	alert(XMLHttpRequest + ", " + textStatus + ", " +  errorThrown);
-				        }
-					});
-				});
-
-				$("#Cancel").on("click", function(){
-				$.ajax({
-				url: "/index.php/home/customer",
-				       	type: "POST",
-				       	data: {},
-				       	dataType: "json",
-				       	success: function(data)
-				       	{
-				        window.location.assign("http://shai.dev.ph/index.php/home/customer");
-				       	},
-				error: function (XMLHttpRequest, textStatus, errorThrown)
-				          { 
-				          bootbox.alert("Error Occured!");
-				          }
-				  });
-				});
-	    	});
-
-	    </script>
 	</head>
 	<body>
 
@@ -147,7 +61,7 @@
                             <fieldset>
 
                                 <div class="form-group">
-                                    <h4 id="lbl"> UserID:  </h4> <p> <span id="UsedID" value=""><?php echo $customer_id; ?></span></p>
+                                    <input id="UserID" name="UserID" value="<?php echo $customer_id; ?>" type="hidden">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" maxlength="15" placeholder="Username" id="Username" type="text" autofocus>
@@ -190,6 +104,6 @@
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 	    <script src="/js/bootstrap.min.js"></script>
-	    <script src="/js/custom.js"></script>
+	    <script src="/js/editcustomer.js"></script>
   	</body>
 </html>

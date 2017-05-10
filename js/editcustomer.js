@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var UserID = $("#UserID").val();
     $.ajax({
@@ -27,7 +28,6 @@ $(document).ready(function () {
     });
 
     $("#Update").on("click", function () {
-        var UserID = $("#UserID").val();
         var Username = $("#Username").val();
         var Password = $("#Password").val();
         var FName = $("#FName").val();
@@ -42,7 +42,6 @@ $(document).ready(function () {
                     type: "POST",
                     data:
                             {
-                                "UserID": UserID,
                                 "Username": Username,
                                 "Password": Password,
                                 "FName": FName,
@@ -77,7 +76,7 @@ $(document).ready(function () {
             },
             error: function (XMLHttpRequest, textStatus, errorThrown)
             {
-                bootbox.alert("Error Occured!");
+               bootbox.alert("Error Occured!");
             }
         });
     });
