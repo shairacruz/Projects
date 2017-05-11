@@ -160,6 +160,14 @@ class Home extends CI_Controller {
         echo json_encode($list);
         exit;
     }
+    
+    public function addorder() {
+        $this->load->model('UserModel');
+        $list = array();
+        $list = $this->UserModel->insertorder($_POST);
+        echo json_encode($list);
+        exit;
+    }
 
 }
 
