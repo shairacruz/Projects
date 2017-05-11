@@ -42,6 +42,7 @@
                         <img src="/images/blog.png" />&nbsp;&nbsp;&nbsp;Products </p>
 
                     <p class="active">
+                        <a href="http://shai.dev.ph/index.php/home/order" class="menu"> 
                         <img src="/images/file.png" />&nbsp;&nbsp;&nbsp;Orders </a></p>
 
                     <p class="menu">
@@ -66,7 +67,7 @@
                                 <h3> Products </h3>
                                 <input class="form-control search" maxlength="30" placeholder="Product Name" id="product" class="search" type="text" autocomplete="off" autofocus>
                                 <input type="button" value="Search" id="search" class="up btnadd">
-                                <button type="button" id="saveorder" class="addbutton"> Save Order </button>
+                                <button type="button" id="SaveOrder" class="addbutton"> Save Order </button>
                             </div>
                             <div class="col-md-12">
                                 <table id="product-table">
