@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    var totalPrice;
+    var qty = [];
+    var costprice = [];
+    var cost = 0;
+    var prod = [];
     $.ajax(
             {
                 url: "/index.php/home/loadusername",
@@ -29,43 +34,44 @@ $(document).ready(function () {
             {
                 //alert("narito");
                 var laman = "<tr data-chk=" + data[i]['ProdID'] + ">" +
-                        "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
-                        "<td>" + data[i]['ProdName'] + "</td>" +
-                        "<td> &#8369;" + parseFloat(data[i]['Price']).toFixed(2) +
-                        "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
-                        "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
-                        "<td id=total" + data[i]['ProdID'] + "> </td></tr>";
+                            "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
+                            "<td>" + data[i]['ProdName'] + "</td>" +
+                            "<td> &#8369;" + data[i]['Price'] +
+                            "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
+                            "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
+                            "<td><input class='form-control cost-list' placeholder='Cost Price' type='text' id=total" + data[i]['ProdID'] + ">  </td></tr>";
                 $("#data").append(laman);
                 $('#price').change(function () {
                     $('#price').val($('#price').val().toFixed(2));
                 });
             }
             $(".qty-list").prop('disabled', false);
+            $(".cost-list").prop('disabled', true);
         }
     });
 
-    $("#Add").click(function () {
-        var Username = $("#Username").val();
-        var Password = $("#Password").val();
-        var FName = $("#FName").val();
-        var MName = $("#MName").val();
-        var LName = $("#LName").val();
-        var Email = $("#Email").val();
-        var ContactNumber = $("#ContactNumber").val();
-        var Address = $("#Address").val();
+    $("#SaveOrder").on("click", function () {
+        
+        var order = [];
+        var orderedproduct = [];
+        
+        order[0] = $("#username").val();
+        order[1] = $("#totalPrice").val();
+        order[2] = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        
+        console.log(order);
+        
+        var username = $("#username").val();
+        var TotalPrice = $("#totalPrice").val();
+        
 
         $.ajax({
-            url: "/index.php/home/addcustomer",
+            url: "/index.php/home/addorder",
             type: "POST",
             data: {
-                "Username": Username,
-                "Password": Password,
-                "FName": FName,
-                "MName": MName,
-                "LName": LName,
-                "Email": Email,
-                "ContactNumber": ContactNumber,
-                "Address": Address
+                "UserID": order[0],
+                "TotalPrice": order[1],
+                "OrderDate": order[2]
             },
             dataType: "json",
             success: function (data)
@@ -120,7 +126,7 @@ $(document).ready(function () {
                             "<td> &#8369;" + data[i]['Price'] +
                             "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
                             "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
-                            "<td id=total" + data[i]['ProdID'] + "> </td></tr>";
+                            "<td id=total" + data[i]['ProdID'] + " value="+totalPrice+"> </td></tr>";
                     $("#data").append(laman);
                     $('#price').change(function () {
                         $('#price').val($('#price').val().toFixed(2));
@@ -128,36 +134,25 @@ $(document).ready(function () {
                 }
             }
         });
-    });
-    var qty = [];
-    var costprice = [];
-    $("#saveorder").on("click", function ()
-    {
-
-        event.preventDefault();
-        var product = $("input.product-list:checkbox:checked").map(function ()
-        {
-            return $(this).val();
-        }).get();
-        qty.splice(0, qty.length);
-        for (var i = 0, l = product.length; i < l; i++)
-        {
-            qty.push($("#" + product[i]).val());
-        }
-        //console.log(product);
-        //console.log(qty);
-        //console.log(costprice);
-    });
+    });  
+    
 
     $("#product-table").on("change", ".product-list", function ()
     {
+        var zero = 0;
+        getProdQtyCost();
+        
         var checked_value = $(this).val();
         if (this.checked)
-        {
+        {           
             $("#" + checked_value).prop('disabled', false);
             $("#" + checked_value).removeClass('qty-disabled');
         } else
         {
+            
+            $("#totalPrice").html(getTotal());
+            $("#" + checked_value).val(0);
+            $("#total" + checked_value).val(0);
             $("#" + checked_value).prop('disabled', true);
             $("#" + checked_value).addClass('qty-disabled');
         }
@@ -165,31 +160,56 @@ $(document).ready(function () {
 
     $("#product-table").on("keyup", ".qty", function ()
     {
-        var cost = 0;
         var qty = $(this).val();
         var element = $(this).attr("id");
         var price = $("#price" + element).val();
         cost = price * qty;
         cost.toFixed(2);
-        costprice.push(cost);
-        $("#total" + element).html(cost);
-
-        //console.log(qty);
-        //console.log(costprice);
-        var totalPrice = getTotal();
-
-        console.log(totalPrice);
+        
+        $("#total" + element).val(cost);
+        totalPrice = getTotal();
         $("#totalPrice").html(totalPrice);
+        $("#totalPrice").val(totalPrice);
     });
-
+    
     function getTotal() {
         var total = 0;
-        var i = 0;
-        while (costprice.length > i) {
-            total += costprice[i];
-            i++;
+        var j = 0;
+        
+        getProdQtyCost();
+       
+        while (costprice.length > j) {
+            //console.log(costprice[j]+total);
+            //console.log(total);
+            total += parseInt(costprice[j]);
+            j++;
         }
+        
+        console.log(prod);
+        console.log(qty);
+        
+        total.toFixed(2);
         return total;
+    }
+    
+    function getProdQtyCost(){
+        event.preventDefault();
+        prod = $("input.product-list:checkbox:checked").map(function ()
+        {
+            return $(this).val();
+        }).get();
+        
+        qty.splice(0, qty.length);
+        for (var i = 0, l = prod.length; i < l; i++)
+        {
+            qty.push($("#" + prod[i]).val());
+        }
+        
+        costprice.splice(0, costprice.length);
+        for (var i = 0, l = prod.length; i < l; i++)
+        {
+            costprice.push($("#total" + prod[i]).val());
+        }
     }
 
 });
