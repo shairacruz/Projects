@@ -75,9 +75,9 @@
                                         <tr> 
                                             <th> &nbsp;&nbsp;</th>
                                             <th> Product Name </th>
-                                            <th id="price"> Price </th>
+                                            <th> Price </th>
                                             <th id="qty"> Qty </th>
-                                            <th id="price"> Cost Price </th>
+                                            <th> Cost Price </th>
                                         </tr>
                                     </thead>
                                     <tbody id="data"></tbody>

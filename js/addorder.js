@@ -36,14 +36,11 @@ $(document).ready(function () {
                 var laman = "<tr data-chk=" + data[i]['ProdID'] + ">" +
                             "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
                             "<td>" + data[i]['ProdName'] + "</td>" +
-                            "<td> &#8369;" + data[i]['Price'] +
+                            "<td> &#8369; " + parseFloat(data[i]['Price']).toFixed(2) + 
                             "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
-                            "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
-                            "<td><input class='form-control cost-list' placeholder='Cost Price' type='text' id=total" + data[i]['ProdID'] + ">  </td></tr>";
+                            "<td align='center'><input id=" + data[i]['ProdID'] + " class=' form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
+                            "<td><input class='price form-control cost-list' placeholder='Cost Price' type='text' id=total" + data[i]['ProdID'] + ">  </td></tr>";
                 $("#data").append(laman);
-                $('#price').change(function () {
-                    $('#price').val($('#price').val().toFixed(2));
-                });
             }
             $(".qty-list").prop('disabled', false);
             $(".cost-list").prop('disabled', true);
@@ -121,21 +118,20 @@ $(document).ready(function () {
                 for (var i = 0; i < data.length; i++)
                 {
                     var laman = "<tr data-chk=" + data[i]['ProdID'] + ">" +
-                            "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
-                            "<td>" + data[i]['ProdName'] + "</td>" +
-                            "<td> &#8369;" + data[i]['Price'] +
-                            "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
-                            "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
-                            "<td id=total" + data[i]['ProdID'] + " value="+totalPrice+"> </td></tr>";
+                        "<td> <input id=chk" + data[i]['ProdID'] + " class='product-list' type= 'checkbox' name='product[]' value=" + data[i]['ProdID'] + "></td>" +
+                        "<td>" + data[i]['ProdName'] + "</td>" +
+                        "<td> &#8369;" + data[i]['Price'] +
+                        "<input type=hidden value=" + data[i]['Price'] + " id=price" + data[i]['ProdID'] + "></td>" +
+                        "<td align='center'><input id=" + data[i]['ProdID'] + " class='form-control qty qty-disabled qty-list' placeholder='Qty' type='text'/></td>" +
+                        "<td><input class='form-control cost-list' placeholder='Cost Price' type='text' id=total" + data[i]['ProdID'] + ">  </td></tr>";
                     $("#data").append(laman);
-                    $('#price').change(function () {
-                        $('#price').val($('#price').val().toFixed(2));
+                    $('.price').change(function () {
+                        $('.price').val($('#price').val().toFixed(2));
                     });
                 }
             }
         });
     });  
-    
 
     $("#product-table").on("change", ".product-list", function ()
     {
@@ -151,8 +147,8 @@ $(document).ready(function () {
         {
             
             $("#totalPrice").html(getTotal());
-            $("#" + checked_value).val(0);
-            $("#total" + checked_value).val(0);
+            $("#" + checked_value).val();
+            $("#total" + checked_value).val();
             $("#" + checked_value).prop('disabled', true);
             $("#" + checked_value).addClass('qty-disabled');
         }
@@ -164,7 +160,6 @@ $(document).ready(function () {
         var element = $(this).attr("id");
         var price = $("#price" + element).val();
         cost = price * qty;
-        cost.toFixed(2);
         
         $("#total" + element).val(cost);
         totalPrice = getTotal();
@@ -185,11 +180,10 @@ $(document).ready(function () {
             j++;
         }
         
-        console.log(prod);
-        console.log(qty);
+        //console.log(prod);
+        //console.log(qty);
         
-        total.toFixed(2);
-        return total;
+        return parseFloat(total).toFixed(2);
     }
     
     function getProdQtyCost(){
